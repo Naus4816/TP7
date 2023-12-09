@@ -34,6 +34,12 @@ pipeline {
                 bat 'docker push naus4816/triang7:1.0.0'
             }
         }
-
     }
+    post{
+            failure{
+                emailext body: 'Ce Build $BUILD_NUMBER a échoué',
+                recipientProviders:[requestor()], subject: 'build', to:
+                    'naus4816@gmail.com
+                }
+        }
 }
